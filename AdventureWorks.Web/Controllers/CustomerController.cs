@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using AdventureWorks.Domain;
 using AdventureWorks.Domain.Models;
@@ -31,6 +32,25 @@ namespace AdventureWorks.Web.Controllers
                     LastName = c.LastName 
                 });
             return View("SearchResults", customers);
+        }
+
+        public IActionResult SearchV2()
+        {
+            SearchViewModel vm = new SearchViewModel();
+            return View(vm);
+        }
+
+        public IActionResult SearchV2_Json(string keyword)
+        {
+            CustomerManager cm = new CustomerManager();
+            var customers = cm.SearchCustomers(keyword)
+                .Select(c => new CustomerViewModel()
+                {
+                    Id = c.Id,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName
+                });
+            return Json(customers);
         }
 
         // Tonen van details van een klant
