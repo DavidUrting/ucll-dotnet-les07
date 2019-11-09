@@ -29,7 +29,8 @@ namespace AdventureWorks.Web.Controllers
                 { 
                     Id = c.Id, 
                     FirstName = c.FirstName, 
-                    LastName = c.LastName 
+                    LastName = c.LastName,
+                    Email = c.Email
                 });
             return View("SearchResults", customers);
         }
@@ -48,7 +49,8 @@ namespace AdventureWorks.Web.Controllers
                 {
                     Id = c.Id,
                     FirstName = c.FirstName,
-                    LastName = c.LastName
+                    LastName = c.LastName,
+                    Email = c.Email
                 });
             return Json(customers);
         }
@@ -64,7 +66,8 @@ namespace AdventureWorks.Web.Controllers
                 {
                     Id = c.Id,
                     FirstName = c.FirstName,
-                    LastName = c.LastName
+                    LastName = c.LastName,
+                    Email = c.Email
                 };
                 return View(vm);
             }

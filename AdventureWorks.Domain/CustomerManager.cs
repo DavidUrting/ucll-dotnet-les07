@@ -16,6 +16,7 @@ namespace AdventureWorks.Domain
             {
                 IEnumerable<Entities.Customer> entities = dbContext.Customer
                     .Include(c => c.Person)
+                    .Include(c => c.Person.EmailAddress)
                     .Where(c => c.Person.FirstName.ToUpper().Contains(keyword)
                                 ||
                                 c.Person.LastName.ToUpper().Contains(keyword));
@@ -25,7 +26,10 @@ namespace AdventureWorks.Domain
                     {
                         Id = entity.CustomerId,
                         FirstName = entity.Person.FirstName,
-                        LastName = entity.Person.LastName
+                        LastName = entity.Person.LastName,
+                        Email = entity.Person.EmailAddress
+                            .Select(ea => ea.EmailAddress1)
+                            .FirstOrDefault()
                     });
                 }
             }
@@ -38,6 +42,7 @@ namespace AdventureWorks.Domain
             {
                 Entities.Customer customer = dbContext.Customer
                     .Include(c => c.Person)
+                    .Include(c => c.Person.EmailAddress)
                     .Where(c => c.CustomerId == id && c.Person != null)
                     .FirstOrDefault();
                 if (customer != null)
@@ -46,7 +51,10 @@ namespace AdventureWorks.Domain
                     {
                         Id = customer.CustomerId,
                         FirstName = customer.Person.FirstName,
-                        LastName = customer.Person.LastName
+                        LastName = customer.Person.LastName,
+                        Email = customer.Person.EmailAddress
+                            .Select(ea => ea.EmailAddress1)
+                            .FirstOrDefault()
                     };
                 }
 

@@ -12,7 +12,7 @@ document.getElementById("searchButton").addEventListener("click", function (e) {
                     '<tr><td>' + result[i].id +
                     '</td><td>' + result[i].firstName +
                     '</td><td>' + result[i].lastName +
-                    '</td><td>' + result[i].emailAddress +
+                    '</td><td>' + result[i].email +
                     '</td><td><a href="/customer/details/' + result[i].id + '">Details</a></td></tr>');
             }
         });
